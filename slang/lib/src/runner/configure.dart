@@ -5,13 +5,31 @@ import 'package:collection/collection.dart';
 import 'package:slang/src/builder/model/i18n_locale.dart';
 import 'package:slang/src/builder/model/slang_file_collection.dart';
 
-void runConfigure(SlangFileCollection fileCollection) {
+void runConfigure(SlangFileCollection fileCollection, {List<String>? arguments}) {
   final locales = getLocales(fileCollection);
 
-  for (final path in const [
-    'ios/Runner/Info.plist',
-    'macos/Runner/Info.plist',
-  ]) {
+  List<String>? sourceDirs;
+  
+  if (arguments != null) {
+    for (final a in arguments) {
+      if (a.startsWith('--source-dirs=')) {
+        sourceDirs = a.substring(14).split(',').map((s) => s.trim()).toList();
+      }
+    }
+  }
+
+  // Fallback to current directory if no custom source dirs specified
+  sourceDirs ??= ['.'];
+
+  final plistPaths = <String>[];
+  for (final sourceDir in sourceDirs) {
+    plistPaths.addAll([
+      '$sourceDir/ios/Runner/Info.plist',
+      '$sourceDir/macos/Runner/Info.plist',
+    ]);
+  }
+
+  for (final path in plistPaths) {
     final file = File(path);
     if (!file.existsSync()) {
       print('File not found: $path');
