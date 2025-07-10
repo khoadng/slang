@@ -2,6 +2,7 @@ name: slang_flutter
 description: Flutter support for slang. This library provides helpful Flutter API.
 version: 4.7.0
 repository: https://github.com/slang-i18n/slang
+publish_to: none
 
 environment:
   flutter: '>=3.19.0'
@@ -14,7 +15,8 @@ dependencies:
     sdk: flutter
 
   # Use a tight version to ensure that all features are available
-  slang: '>=4.7.0 <4.8.0'
+  slang:
+    path: ../slang
 
 dev_dependencies:
   intl: any
