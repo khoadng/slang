@@ -10,8 +10,8 @@ import 'package:slang/src/builder/model/sanitization_config.dart';
 import 'package:slang/src/builder/utils/map_utils.dart';
 import 'package:slang/src/builder/utils/regex_utils.dart';
 import 'package:slang/src/builder/utils/string_extensions.dart';
-import 'package:yaml/yaml.dart';
 import 'package:slang/src/utils/log.dart' as log;
+import 'package:yaml/yaml.dart';
 
 class RawConfigBuilder {
   /// Parses the full build.yaml file to get the config
